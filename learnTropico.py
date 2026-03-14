@@ -11,29 +11,40 @@ from readStats import *
 # ----------------------------
 # paramètres
 # ----------------------------
-state_size = 14
+state_size = 18
 action_size = 5 # nombre d'actions possibles
-step = 0
-building_count = 0
 
 # ----------------------------
 # fonctions de lecture d'état
 # ----------------------------
 def read_state():
     global step, building_count
+
     money = read_money()
     population = read_population()
     satisfaction = read_satisfaction()
     happinness = read_happinness()
+
     political = read_political()
 
-    return [money, 
-            population,
-            satisfaction,
-            happinness, 
-            *political,
-            step,
-            building_count]
+    housing = read_housing()
+    food = read_food()
+    industry = read_industry()
+    tourism = read_tourism()
+
+    return [
+        money,
+        population,
+        satisfaction,
+        happinness,
+        *political,
+        housing,
+        food,
+        industry,
+        tourism,
+        step,
+        building_count
+    ]
 
 # ----------------------------
 # fonctions d'action
@@ -72,20 +83,29 @@ def choose_action():
 # création dataset
 # ----------------------------
 dataset = []
-n_samples = 200  # ajuster selon la durée que tu peux consacrer
 
-for _ in range(n_samples):
+step = 0
+building_count = 0
+
+n_samples = 5000  # ajuster selon la durée que tu peux consacrer
+
+for i in range(n_samples):
     state = read_state()
     action = choose_action()
     perform_action(action)
     time.sleep(5)
     next_state = read_state()
+
     dataset.append({
         "state": state,
         "action": encode_action(action, action_size),
         "next_state": next_state
     })
+
     step += 1
+    print("sample", i)
+
+torch.save(dataset,"dataset_tropico.pt")
 # ----------------------------
 # préparation des données
 # ----------------------------
@@ -102,37 +122,50 @@ next_states = next_states / max_vals
 # modèle
 # ----------------------------
 class WorldModel(nn.Module):
-    def __init__(self, state_size, action_size):
-        super().__init__()
-        self.net = nn.Sequential(
-            nn.Linear(state_size + action_size, 128),
-            nn.ReLU(),
-            nn.Linear(128,128),
-            nn.ReLU(),
-            nn.Linear(128,state_size)
-        )
-    def forward(self, state, action):
-        x = torch.cat((state, action), dim=1)
-        return self.net(x)
 
-model = WorldModel(state_size, action_size)
-model.load_state_dict(torch.load("tropico_world_model.pth"))
-model.eval()
+    def __init__(self,state_size,action_size):
+
+        super().__init__()
+
+        self.net = nn.Sequential(
+
+            nn.Linear(state_size+action_size,256),
+            nn.ReLU(),
+
+            nn.Linear(256,256),
+            nn.ReLU(),
+
+            nn.Linear(256,state_size)
+        )
+
+    def forward(self,state,action):
+
+        x = torch.cat((state,action),dim=1)
+
+        return self.net(x)
 
 # ----------------------------
 # entraînement
 # ----------------------------
-optimizer = optim.Adam(model.parameters(), lr=0.001)
+model = WorldModel(state_size,action_size)
+optimizer = optim.Adam(model.parameters(),lr=0.001)
 loss_fn = nn.MSELoss()
-epochs = 100
+
+epochs = 200
 
 for epoch in range(epochs):
-    pred_next = model(states, actions)
-    loss = loss_fn(pred_next, next_states)
+
+    pred = model(states,actions)
+
+    loss = loss_fn(pred,next_states)
+
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
-    print(f"epoch: {epoch}, loss: {loss.item():.4f}")
+
+    print("epoch",epoch,"loss",loss.item())
+
+torch.save(model.state_dict(),"tropico_world_model.pth")
 
 # ----------------------------
 # test du modèle
