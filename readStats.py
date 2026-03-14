@@ -1,36 +1,36 @@
 import pyautogui
-from visionNumbers import read_number_cv
+from readNumber import read_number
 
 def read_money():
-    return read_number_cv(region=(231,50,104,15))
+    return read_number(region=(231,50,104,15))
 
 def read_population():
-    return read_number_cv(region=(366, 49, 55, 15))
+    return read_number(region=(366, 49, 55, 15))
 
 def read_satisfaction():
-    return read_number_cv(region=(453, 51, 51, 17))
+    return read_number(region=(453, 51, 51, 17))
 
 def read_happinness():
     pyautogui.press("b")
-    result = read_number_cv(region=(877, 461, 32, 14))
+    result = read_number(region=(877, 461, 32, 14))
     pyautogui.press("ESCAPE")
     return result
 
 def read_population():
-    return read_number_cv(region=(366, 49, 55, 15))
+    return read_number(region=(366, 49, 55, 15))
 
 def read_satisfaction():
-    return read_number_cv(region=(453, 51, 51, 17))
+    return read_number(region=(453, 51, 51, 17))
 
 def read_happinness():
     pyautogui.press("b")
-    result = read_number_cv(region=(877, 461, 32, 14))
+    result = read_number(region=(877, 461, 32, 14))
     pyautogui.press("ESCAPE")
     return result
 
 def read_happinness():
     pyautogui.press("b")
-    result = read_number_cv(region=(877, 461, 32, 14))
+    result = read_number(region=(877, 461, 32, 14))
     pyautogui.press("ESCAPE")
     return result
 
@@ -66,79 +66,79 @@ def read_political():
 
 
 def read_capitalist():
-    return read_number_cv(region=(642, 322, 22, 15))
+    return read_number(region=(642, 322, 22, 15))
 
 def read_communist():
-    return read_number_cv(region=(932, 322, 22, 15))
+    return read_number(region=(932, 322, 22, 15))
 
 def read_religious():
-    return read_number_cv(region=(642, 430, 22, 15))
+    return read_number(region=(642, 430, 22, 15))
 
 def read_militarians():
-    return read_number_cv(region=(932, 430, 22, 15))
+    return read_number(region=(932, 430, 22, 15))
 
 def read_ecologists():
-    return read_number_cv(region=(642, 461, 22, 15))
+    return read_number(region=(642, 461, 22, 15))
 
 def read_industrialists():
-    return read_number_cv(region=(932, 461, 22, 15))
+    return read_number(region=(932, 461, 22, 15))
 
 def read_intellectualists():
-    return read_number_cv(region=(642, 492, 22, 15))
+    return read_number(region=(642, 492, 22, 15))
 
 def read_conservatists():
-    return read_number_cv(region=(932, 492, 22, 15))
+    return read_number(region=(932, 492, 22, 15))
 
 def read_communist():
-    return read_number_cv(region=(932, 322, 22, 15))
+    return read_number(region=(932, 322, 22, 15))
 
 def read_religious():
-    return read_number_cv(region=(642, 430, 22, 15))
+    return read_number(region=(642, 430, 22, 15))
 
 def read_militarians():
-    return read_number_cv(region=(932, 430, 22, 15))
+    return read_number(region=(932, 430, 22, 15))
 
 def read_ecologists():
-    return read_number_cv(region=(642, 461, 22, 15))
+    return read_number(region=(642, 461, 22, 15))
 
 def read_industrialists():
-    return read_number_cv(region=(932, 461, 22, 15))
+    return read_number(region=(932, 461, 22, 15))
 
 def read_intellectualists():
-    return read_number_cv(region=(642, 492, 22, 15))
+    return read_number(region=(642, 492, 22, 15))
 
 def read_conservatists():
-    return read_number_cv(region=(932, 492, 22, 15))
+    return read_number(region=(932, 492, 22, 15))
 
 def read_religious():
-    return read_number_cv(region=(642, 430, 22, 15))
+    return read_number(region=(642, 430, 22, 15))
 
 def read_militarians():
-    return read_number_cv(region=(932, 430, 22, 15))
+    return read_number(region=(932, 430, 22, 15))
 
 def read_ecologists():
-    return read_number_cv(region=(642, 461, 22, 15))
+    return read_number(region=(642, 461, 22, 15))
 
 def read_industrialists():
-    return read_number_cv(region=(932, 461, 22, 15))
+    return read_number(region=(932, 461, 22, 15))
 
 def read_intellectualists():
-    return read_number_cv(region=(642, 492, 22, 15))
+    return read_number(region=(642, 492, 22, 15))
 
 def read_conservatists():
-    return read_number_cv(region=(932, 492, 22, 15))
+    return read_number(region=(932, 492, 22, 15))
 
 def read_conservatists():
-    return read_number_cv(region=(932, 492, 22, 15))
+    return read_number(region=(932, 492, 22, 15))
 
 def read_housing():
-    return read_number_cv((905,470,60,30))
+    return read_number((905,470,60,30))
 
 def read_food():
-    return read_number_cv((905,330,60,30))
+    return read_number((905,330,60,30))
 
 def read_industry():
-    return read_number_cv((905,380,60,30))
+    return read_number((905,380,60,30))
 
 def read_tourism():
-    return read_number_cv((905,650,60,30))
+    return read_number((905,650,60,30))

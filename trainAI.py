@@ -1,15 +1,11 @@
-from stable_baselines3 import PPO
+from tropicoEnv import TropicoSimEnv
+env = TropicoSimEnv(world_model)
+state = initial_state
 
-from tropicoEnv import TropicoEnv
-
-env = TropicoEnv()
-
-model = PPO(
-    "CnnPolicy",
-    env,
-    verbose=1
-)
-
-model.learn(total_timesteps=100000)
-
-model.save("tropico_ai")
+for episode in range(num_episodes):
+    done = False
+    while not done:
+        action = policy(state)
+        next_state, reward = env.step(state, action)
+        policy.update(state, action, reward, next_state)
+        state = next_state
